@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<h:head>
+	<title>Listagem de Alunos</title>
+	</h:head>
+	<h:body>
+		<h:form id="formulario">
+			<p:messages id="messages" showDetail="false" closable="true">
+	            <p:autoUpdate/>
+	        </p:messages>
+
+			<p:dataTable 
+			id="dt-alunos" value="#{alunoBean.lista}" var="a" 
+			selection="#{alunoBean.alunoSelecionado}" rowKey="#{a.id}" 
+			selectionMode="single"  paginator="true" rows="10" selectionRowMode="add" paginatorPosition="bottom">
+			
+			<p:ajax event="rowSelect" update="formulario:deletar" />
+    		<p:ajax event="rowUnselect" update="formulario:deletar" />
+    		
+				<p:column headerText="Id"><p:outputLabel value="#{a.id}"/> </p:column>
+				<p:column headerText="Nome"><p:outputLabel value="#{a.nome}"/> </p:column>
+				<p:column headerText="Matrícula"><p:outputLabel value="#{a.matricula}"/> </p:column>
+				<p:column headerText="Curso"><p:outputLabel value="#{a.curso}"/> </p:column>
+				<p:column headerText="Data de Nascimento"><p:outputLabel value="#{a.getDataFormatada()}"/> </p:column>
+				<p:column headerText="Actions">
+				<p:commandButton icon="pi pi-info-circle" styleClass="rounded-button ui-button-outlined" action="#{alunoBean.info}"/>
+				</p:column>
+			</p:dataTable>
+	
+			<p:toolbar>
+	            <p:toolbarGroup>	
+    		        <p:commandButton 
+           				 id="deletar" value="Excluir"	update="dt-alunos" 
+           				 icon="pi pi-trash" actionListener="#{alunoBean.deletar}" styleClass="ui-button-danger"
+           				 disabled="#{alunoBean.alunoSelecionado == null}">
+                    		 <p:confirm header="Confirmação" 
+                      		  message="Deseja excluir #{alunoBean.alunoSelecionado.nome}?"	
+                       		  icon="pi pi-exclamation-triangle" uptade="dt-alunos"/>
+                	</p:commandButton>
+            	</p:toolbarGroup>
+	            <p:toolbarGroup>	
+    		        <p:commandButton value="Quantidade de Alunos" action="#{alunoBean.size()}"/>
+            	</p:toolbarGroup> 
+	            <p:toolbarGroup>	
+    		        <p:commandButton value="Página Inicial" action="index" icon="pi pi-home"/>
+            	</p:toolbarGroup> 
+            	<p:toolbarGroup>	
+    		        <p:menuButton value="Filtros">
+                	    <p:menuitem value="Ordem Alfabética" action="#{toolbarView.save}" update="messages" icon="pi pi-save"/>
+            	        <p:menuitem value="Cursos" action="#{toolbarView.update}" update="messages" icon="pi pi-refresh"/>
+ 	               </p:menuButton>
+            	</p:toolbarGroup>
+          	</p:toolbar>          				
+		</h:form>
+
+		<p:confirmDialog global="true" showEffect="fade" width="300">
+    		<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+    		<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+		</p:confirmDialog>	
+	</h:body>
+</html>
