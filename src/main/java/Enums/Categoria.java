@@ -1,0 +1,16 @@
+package Enums;
+
+public enum Categoria {
+	ENTRADA,
+	PRATO_PRINCIPAL,
+	SOBREMESA,
+	PETISCO,
+	DRINK,
+	SUSHI,
+	SANDUICHE,
+	LANCHE,
+	PAO,
+	SALADA,
+	MOLHO,
+	VEGANO
+}
