@@ -33,4 +33,7 @@ public class UsuarioDao {
 		em.getTransaction().commit();
 		em.close();
 	}
+	
+	
+	//teste git
 }
