@@ -19,7 +19,6 @@ public class Usuario {
     private Integer id;
 
     @Column(nullable = false, length = 100)
-
     private String nome;
 
     @Column(unique = true, nullable = false, length = 150)
@@ -34,6 +33,10 @@ public class Usuario {
     @Column(name = "is_admin", nullable = false) 
     private boolean isAdmin;
 
+    public Usuario() {
+    	
+    }
+    
 	public Usuario(String nome, String email, String senha, List<Receita> receitas, boolean isAdmin) {
 		this.nome = nome;
 		this.email = email;

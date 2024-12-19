@@ -14,8 +14,9 @@
 		  <div class="welcome-container">
             <h1>Bem-vindo ao The Recipe's Wall!</h1>
             <p>Descubra, compartilhe e avalie as melhores receitas do mundo.</p>
-            <h:commandButton value="Cadastre-se Agora" action="index.xhtml" styleClass="welcome-button" />
+        	<h:form>
+	            <p:commandButton value="Cadastre-se Agora" action="#{usuarioBean.redirect}"/>
+   			</h:form>
         </div>
 	</h:body>	
-
 </html>
