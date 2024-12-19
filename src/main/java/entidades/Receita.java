@@ -136,4 +136,9 @@ public class Receita {
 		nota += avaliacao;
 		qtdAvaliacoes++;		
 	}
+	
+	public Double mediaAvaliacao(){
+		double media = nota / qtdAvaliacoes;
+		return media;
+	}
 }
